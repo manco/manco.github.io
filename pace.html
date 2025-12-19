@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strefa Dobrej Formy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-rust-dark: #a33920;
+            --color-rust-light: #b93d21;
+            --color-brown: #281e1d;
+            --color-cream: #fcf7f4;
+            --color-green: #123524;
+            --color-text-gray: #666;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--color-green) 0%, var(--color-rust-dark) 50%, var(--color-rust-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--color-cream);
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(18, 53, 36, 0.3);
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 420px;
+            border-top: 5px solid var(--color-green);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: var(--color-rust-dark);
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--color-green);
+            font-size: 14px;
+            margin-bottom: 28px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .input-section {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(18, 53, 36, 0.15);
+        }
+
+        .input-section:last-of-type {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--color-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+            display: block;
+            opacity: 0.7;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .input-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-green);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--color-rust-light);
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            background: rgba(185, 61, 33, 0.04);
+            color: var(--color-brown);
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--color-green);
+            background: var(--color-cream);
+            box-shadow: 0 0 0 3px rgba(18, 53, 36, 0.1);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, var(--color-green) 0%, var(--color-rust-dark) 100%);
+            color: var(--color-cream);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(18, 53, 36, 0.3);
+            margin-top: 12px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(18, 53, 36, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 2px solid rgba(18, 53, 36, 0.2);
+        }
+
+        .result-item {
+            margin-bottom: 16px;
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-green);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        #result_pace {
+            width: 100%;
+            padding: 16px 14px;
+            border: 2px solid var(--color-green);
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            background: rgba(18, 53, 36, 0.08);
+            color: var(--color-green);
+            text-align: center;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        #result_speed {
+            width: 100%;
+            padding: 16px 14px;
+            border: 2px solid var(--color-rust-light);
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            background: rgba(185, 61, 33, 0.08);
+            color: var(--color-rust-light);
+            text-align: center;
+            font-family: 'Monaco', 'Courier New', monospace;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 40px 32px;
+                max-width: 500px;
+            }
+
+            h1 {
+                font-size: 32px;
+                margin-bottom: 12px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+                margin-bottom: 32px;
+            }
+
+            .input-row {
+                gap: 16px;
+            }
+
+            input[type="number"] {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+
+            button {
+                padding: 16px 28px;
+                font-size: 17px;
+            }
+
+            #result_pace,
+            #result_speed {
+                padding: 18px 16px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Running Pace Calculator</h1>
+        <p class="subtitle">Calculate your pace and speed</p>
+
+        <form id="paceForm">
+            <div class="input-section">
+                <span class="section-title">Distance</span>
+                <div class="input-row">
+                    <div>
+                        <label for="input_dist_km">Distance (km)</label>
+                        <input type="number" id="input_dist_km" name="input_dist_km" value="0" step="0.1">
+                    </div>
+                    <div>
+                        <label for="input_dist_m">Distance (m)</label>
+                        <input type="number" id="input_dist_m" name="input_dist_m" value="10000" step="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <span class="section-title">Time</span>
+                <div class="input-row">
+                    <div>
+                        <label for="input_h">Hours</label>
+                        <input type="number" id="input_h" name="input_h" value="0" step="1">
+                    </div>
+                    <div>
+                        <label for="input_min">Minutes</label>
+                        <input type="number" id="input_min" name="input_min" value="50" step="1">
+                    </div>
+                </div>
+
+                <div class="input-row full">
+                    <div>
+                        <label for="input_sec">Seconds</label>
+                        <input type="number" id="input_sec" name="input_sec" value="30" step="1">
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" onclick="handleCalculate()">Calculate</button>
+        </form>
+
+        <div class="results">
+            <div class="result-item">
+                <span class="result-label">Pace</span>
+                <input type="text" id="result_pace" readonly placeholder="—">
+            </div>
+            <div class="result-item">
+                <span class="result-label">Speed</span>
+                <input type="text" id="result_speed" readonly placeholder="—">
+            </div>
+        </div>
+    </div>
+
+    <script src="pace.js"></script>
+    <script>
+        function handleCalculate() {
+            const form = document.getElementById('paceForm');
+            const result = calculate_pace_and_speed(
+                parseFloat(form.input_dist_km.value),
+                parseFloat(form.input_dist_m.value),
+                parseFloat(form.input_h.value),
+                parseFloat(form.input_min.value),
+                parseFloat(form.input_sec.value)
+            );
+
+            document.getElementById('result_pace').value = `Pace = ${result.pace_minutes}' ${result.pace_seconds}" / km`;
+            document.getElementById('result_speed').value = `Speed = ${result.speed} km/h`;
+        }
+    </script>
+</body>
+</html>
